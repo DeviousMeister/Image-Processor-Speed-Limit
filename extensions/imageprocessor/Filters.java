@@ -128,9 +128,21 @@ public class Filters {
 	 * @return
 	 */
 	public static Color bgSubtract(Color source1Color, Color source2Color, int tolerance) {
-		return Color.black;
-
+		int c1Red = source1Color.getRed();
+		int c1Green = source1Color.getGreen();
+		int c1Blue = source1Color.getBlue();
+		int c2Red = source2Color.getRed();
+		int c2Green = source2Color.getGreen();
+		int c2Blue = source2Color.getBlue();
+		int redDif = Math.abs(c1Red-c2Red);
+		int greenDif = Math.abs(c1Green-c2Green);
+		int blueDif = Math.abs(c1Blue-c2Blue);
+		if(redDif < tolerance || greenDif < tolerance || blueDif < tolerance){
+			return Color.BLUE;
+		}
+		return source1Color;
 	}
+
 
 	private static Random r = new Random();
 	public static Color genRandomColor() {
@@ -140,7 +152,14 @@ public class Filters {
 	//second image if the color from the first image is blue; otherwise returns
 	//the color from the first image.
 	public static Color bgReplace(Color s1Color, Color s2Color) {
-		return genRandomColor();
+
+		if(s1Color.equals(Color.BLUE)){
+			return s2Color;
+		}
+		else{
+			return s1Color;
+		}
+
 	}
 
 }

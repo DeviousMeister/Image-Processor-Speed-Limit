@@ -33,12 +33,33 @@ public class Transforms {
 	}
 	
 	public static void flipVert(Picture source, Picture target) {
-		// FIXME
+		for (int y = 0; y < source.height(); y++){
+			for (int x = 0; x < source.width(); x++){
+				int otherY = source.height() - 1 - y;
+				Color c2 = source.get(x, otherY);
+				target.set(x, y, c2);
+			}
+		}
 	}
 	
 	
 	public static void flipHorizLeftHalf(Picture source, Picture target) {
-		// FIXME
+		for (int x = 0; x < source.width(); x++){
+			for (int y = 0; y < source.height(); y++){
+
+
+				if(x<(source.width()/2)){
+					Color c1 = source.get(x, y);
+					target.set(x, y, c1);
+				}
+				else{
+					int otherX = source.width() - x;
+					Color c1 = source.get(otherX, y);
+					target.set(x, y, c1);
+				}
+
+			}
+		}
 	}
 	
 	public static void flipVertBotHalf(Picture source, Picture target) {
