@@ -46,8 +46,6 @@ public class Transforms {
 	public static void flipHorizLeftHalf(Picture source, Picture target) {
 		for (int x = 0; x < source.width(); x++){
 			for (int y = 0; y < source.height(); y++){
-
-
 				if(x<(source.width()/2)){
 					Color c1 = source.get(x, y);
 					target.set(x, y, c1);
@@ -63,12 +61,31 @@ public class Transforms {
 	}
 	
 	public static void flipVertBotHalf(Picture source, Picture target) {
-		// FIXME
+		for (int y = 0; y < source.height(); y++){
+			for (int x = 0; x < source.width(); x++){
+				if(y<(source.height()/2)){
+					Color c1 = source.get(x, y);
+					target.set(x, y, c1);
+				}
+				else{
+					int otherY = source.height()-1-y;
+					Color c1 = source.get(x, otherY);
+					target.set(x, y, c1);
+				}
+			}
+		}
 	}
 	
 	public static void gradient(Picture target) {
-		// FIXME
-				
+		for (int x = 0; x < target.width(); ++x){
+			for (int y = 0; y < target.height(); ++y){
+				int otherX = target.width() - 1;
+				int otherY = target.height() - 1;
+				int amountRed = ((x)*(255/otherX));
+				int amountGreen = (int)((y)*((double) 255)/otherY);
+				target.set(x, y, new Color(amountRed, amountGreen,128));
+			}
+		}
 	}
 	
 	public static void edgeDetect(Picture source, Picture target) {
